@@ -18,9 +18,9 @@ build_jekyll: &build_jekyll
         cp ~/repo/.circleci/circle_urls.sh ~/repo/circle_urls.sh
         cd ~/repo
         chmod u+x circle_urls.sh
-        bash circle_urls.sh              
+        bash circle_urls.sh
         bundle exec jekyll build
-        
+
 jobs:
   build-site:
     docker:
@@ -46,5 +46,5 @@ jobs:
             - vendor/bundle
       - run: *build_jekyll
       - store_artifacts:
-          path: ~/repo/_site
-          destination: docsy-jekyll
+          path: ~/docs/_site
+          destination: animoBNES.github.io
