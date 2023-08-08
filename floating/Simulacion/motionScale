@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+|*---------------------------------------------------------------------------*|
+|* OpenFOAM for Windows 18.06 (v1)                                           *|
+|* Built by CFD Support, www.cfdsupport.com (based on Symscape).             *|
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       pointScalarField;
+    location    "0";
+    object      motionScale;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    stationaryWalls
+    {
+        type            calculated;
+    }
+    atmosphere
+    {
+        type            calculated;
+    }
+    floatingObject
+    {
+        type            calculated;
+    }
+}
+
+
+// ************************************************************************* //
