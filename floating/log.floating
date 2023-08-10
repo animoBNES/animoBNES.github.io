@@ -97,6 +97,33 @@ boost
 vtk
 
 
+# 2.1 wolf
+    sudo usermod -aG docker $(whoami)
+    sudo sh -c "wget http://dl.openfoam.org/docker/openfoam11-linux -O /usr/bin/openfoam11-linux"
+    sudo chmod 755 /usr/bin/openfoam11-linux
+
+    mkdir -p $HOME/OpenFOAM/${USER}-11
+    cd $HOME/OpenFOAM/${USER}-11
+    openfoam11-linux
+
+    sh ./openfoam11-linux
+
+    mkdir -p $FOAM_RUN
+
+    cd $FOAM_RUN
+    cp -r $FOAM_TUTORIALS/incompressibleFluid/pitzDailySteady .
+    cd pitzDailySteady
+    blockMesh
+    foamRun
+    paraFoam
+
+    exit
+
+
+## 2.1.1 multiphase
+###
+
+
 # 3. wave2Foam
 0) sudo apt instal subversion
 1) svn co http://svn.code.sf.net/p/openfoam-extend/svn/trunk/Breeder_1.6/other/waves2Foam
