@@ -1,29 +1,119 @@
-1. code, standard, specification, guideline
-    DNV
-2. references
-    thesis
-    text
-3. SW
+# 0.
+    wave2Foam
+        shear current theory: Koray Deniz Göral, Håkan Nilsson
+            ESI 2012
+                docker
+                    vc
+                        Dev Containers extension
+                            F1
+                                Dev Container: Nodes.js Sample
+                            ^~`
+                                terminal
+                            F5
+                                run inside container
+            x ./openfoam-docker -2012 -data=/media/sbkim/urban/urban/hines
+            o ./openfoam-docker -2012 -default -data=/media/sbkim/urban/urban/hines
+                docker search openfoam
+
+                docker container run -ti cfdengine/openfoam
+                docker container run -ti --rm cfdengine/openfoam
+                docker container run -ti --rm -v $PWD:/data -w /data cfdengine/openfoam
+
+                docker images
+                docker image build -t myopenfoam:v6.0 .
+                docker container run -ti --rm \
+                    -v $PWD:/data -w /data myopenfoam:v6.0
+
+                docker ps
+                docker ps -a
+                docker rm id
+
+                docker images
+                docker rmi id
+                docker rmi -f id
+
+                sudo su - root
+                cp .bashrc /home/openfoam/.bashrc_2012
+
+            svn co http://svn.code.sf.net/p/openfoam-extend/svn/trunk/Breeder_1.6/other/waves2Foam
+            mkdir -p $WM_PROJECT_USER_DIR/applications/utilities
+
+            solvers:
+                waveFoam
+                porousWaveFoam
+                waveDyMFoam
+
+
+        manual: Niels Gjøl Jacobsen
+            OF-3.0, OF-4.0 x
+            OF+-3.0, OF+-1606, OF+-1612 x
+            FE-3.1, FE-3.2, FE-4.0
+
+            docker pull dicehub/openfoam:foam-extend-4.1
+            docker container run -ti -v $PWD:/data -w /data dicehub/openfoam:foam-extend-4.1
+            docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work dicehub/openfoam:foam-extend-4.1 "bash"
+
+            x ./openfoam-docker -1606 -default -data=/media/sbkim/urban/urban/hines
+            ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
+            docker container run -ti openfoamplus/of_v1606plus_centos66
+
+            https://hub.docker.com/r/bgschaid/openfoam_by_ansible
+            https://github.com/FoamScience/foam-extend-4.1-openmpi
+            https://hub.docker.com/r/dicehub/openfoam
+
+
+    foamMooring
+
+
+
+
+# 1. pjt
+삼성, 권호철 상무
+    수의계약
+    10월 초, 제안서
+TESolution, 이승우 전무
+
+건화: design company
+
+정은영 박사: 1.5억
+
+1) wave
+    파랑: 파고, 파장, 2초
+
+2) ref
+    - code, standard, specification, guideline
+        DNV
+    - etc
+        thesis
+        text
+
+
+# 2. SW
 sudo ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
 
 
-4. pjt
-    삼성, 권호철 상무
-        수의계약
-        10월 초, 제안서
-    TESolution, 이승우 전무
-
-    건화/ 1.5억
-
-    파랑: 파고, 파장, 2초
+eigen
+boost
+vtk
 
 
-1. olafoam
+# 3. wave2Foam
+0) sudo apt instal subversion
+1) svn co http://svn.code.sf.net/p/openfoam-extend/svn/trunk/Breeder_1.6/other/waves2Foam
+2) sudo apt-get install libgsl0-dev
 
-2. https://gitlab.com/hfchen20/foamMooring
 
-3. https://www.cfd-online.com/Forums/openfoam-solving/244338-openfoam-mooring-line.html
+# 4. olaFlow
 
+
+# 5. https://gitlab.com/hfchen20/foamMooring
+
+
+
+# 6. https://github.com/FloatingArrayDesign/MoorDyn
+
+
+# -2. https://www.cfd-online.com/Forums/openfoam-solving/244338-openfoam-mooring-line.html
 simulate floating body motions under regular waves:
     - 6dof freedom floating body
 
@@ -50,4 +140,4 @@ CFD simulation of floating body motion with mooring dynamics:
         b) In rigidBodyModel/forwardDynamics.C
             //-Remove const specifier for applyRestraints() method
 
-4. https://hatarilabs.com/ih-en/floating-object-stability-modeling-with-openfoam
+# -1. https://hatarilabs.com/ih-en/floating-object-stability-modeling-with-openfoam
