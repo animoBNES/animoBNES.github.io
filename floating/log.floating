@@ -1,10 +1,3 @@
-
-
-    foamMooring
-
-
-
-
 # 1. pjt
 삼성, 권호철 상무
     수의계약
@@ -144,7 +137,7 @@ simulate floating body motions under regular waves:
 CFD simulation of floating body motion with mooring dynamics:
     - catenary mooring lines
 
-    - MoorDyn, Moody and Mooring Lines of Waves2Foam options.
+    - MoorDyn, MooDy and Mooring Lines of Waves2Foam options.
         : waves2foam is only compatible with openfoamv1606
         : oversetmesh
 
