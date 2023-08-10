@@ -1,65 +1,3 @@
-# 0.
-    wave2Foam
-        shear current theory: Koray Deniz Göral, Håkan Nilsson
-            ESI 2012
-                docker
-                    vc
-                        Dev Containers extension
-                            F1
-                                Dev Container: Nodes.js Sample
-                            ^~`
-                                terminal
-                            F5
-                                run inside container
-            x ./openfoam-docker -2012 -data=/media/sbkim/urban/urban/hines
-            o ./openfoam-docker -2012 -default -data=/media/sbkim/urban/urban/hines
-                docker search openfoam
-
-                docker container run -ti cfdengine/openfoam
-                docker container run -ti --rm cfdengine/openfoam
-                docker container run -ti --rm -v $PWD:/data -w /data cfdengine/openfoam
-
-                docker images
-                docker image build -t myopenfoam:v6.0 .
-                docker container run -ti --rm \
-                    -v $PWD:/data -w /data myopenfoam:v6.0
-
-                docker ps
-                docker ps -a
-                docker rm id
-
-                docker images
-                docker rmi id
-                docker rmi -f id
-
-                sudo su - root
-                cp .bashrc /home/openfoam/.bashrc_2012
-
-            svn co http://svn.code.sf.net/p/openfoam-extend/svn/trunk/Breeder_1.6/other/waves2Foam
-            mkdir -p $WM_PROJECT_USER_DIR/applications/utilities
-
-            solvers:
-                waveFoam
-                porousWaveFoam
-                waveDyMFoam
-
-
-        manual: Niels Gjøl Jacobsen
-            OF-3.0, OF-4.0 x
-            OF+-3.0, OF+-1606, OF+-1612 x
-            FE-3.1, FE-3.2, FE-4.0
-
-            docker pull dicehub/openfoam:foam-extend-4.1
-            docker container run -ti -v $PWD:/data -w /data dicehub/openfoam:foam-extend-4.1
-            docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work dicehub/openfoam:foam-extend-4.1 "bash"
-
-            x ./openfoam-docker -1606 -default -data=/media/sbkim/urban/urban/hines
-            ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
-            docker container run -ti openfoamplus/of_v1606plus_centos66
-
-            https://hub.docker.com/r/bgschaid/openfoam_by_ansible
-            https://github.com/FoamScience/foam-extend-4.1-openmpi
-            https://hub.docker.com/r/dicehub/openfoam
 
 
     foamMooring
@@ -129,13 +67,72 @@ vtk
 1) svn co http://svn.code.sf.net/p/openfoam-extend/svn/trunk/Breeder_1.6/other/waves2Foam
 2) sudo apt-get install libgsl0-dev
 
+## 3.1 shear current theory: Koray Deniz Göral, Håkan Nilsson
+        ESI 2012
+            docker
+                vc
+                    Dev Containers extension
+                        F1
+                            Dev Container: Nodes.js Sample
+                        ^~`
+                            terminal
+                        F5
+                            run inside container
+        x ./openfoam-docker -2012 -data=/media/sbkim/urban/urban/hines
+        o ./openfoam-docker -2012 -default -data=/media/sbkim/urban/urban/hines
+            docker search openfoam
+
+            docker container run -ti cfdengine/openfoam
+            docker container run -ti --rm cfdengine/openfoam
+            docker container run -ti --rm -v $PWD:/data -w /data cfdengine/openfoam
+
+            docker images
+            docker image build -t myopenfoam:v6.0 .
+            docker container run -ti --rm \
+                -v $PWD:/data -w /data myopenfoam:v6.0
+
+            docker ps
+            docker ps -a
+            docker rm id
+
+            docker images
+            docker rmi id
+            docker rmi -f id
+
+            sudo su - root
+            cp .bashrc /home/openfoam/.bashrc_2012
+
+        svn co http://svn.code.sf.net/p/openfoam-extend/svn/trunk/Breeder_1.6/other/waves2Foam
+        mkdir -p $WM_PROJECT_USER_DIR/applications/utilities
+
+        solvers:
+            waveFoam
+            porousWaveFoam
+            waveDyMFoam
+
+## 3.2 manual: Niels Gjøl Jacobsen
+        OF-3.0, OF-4.0 x
+        OF+-3.0, OF+-1606, OF+-1612 x
+        FE-3.1, FE-3.2, FE-4.0
+
+        docker pull dicehub/openfoam:foam-extend-4.1
+        docker container run -ti -v $PWD:/data -w /data dicehub/openfoam:foam-extend-4.1
+        docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work dicehub/openfoam:foam-extend-4.1 "bash"
+
+        x ./openfoam-docker -1606 -default -data=/media/sbkim/urban/urban/hines
+        ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
+        docker container run -ti openfoamplus/of_v1606plus_centos66
+
+        https://hub.docker.com/r/bgschaid/openfoam_by_ansible
+        https://github.com/FoamScience/foam-extend-4.1-openmpi
+        https://hub.docker.com/r/dicehub/openfoam
+
 
 # 4. olaFlow
 
 
 # 5. https://gitlab.com/hfchen20/foamMooring
-
-
+        https://doi.org/10.1016/j.apor.2022.103210
 
 # 6. https://github.com/FloatingArrayDesign/MoorDyn
 
@@ -152,14 +149,17 @@ CFD simulation of floating body motion with mooring dynamics:
         : oversetmesh
 
     - MoorDyn
-        https://doi.org/10.1016/j.apor.2022.103210
-        https://gitlab.com/hfchen20/foamMooring
+        https://github.com/FloatingArrayDesign/MoorDyn
+
+    - map++
+        https://bitbucket.org/mmasciola/map-plus-plus/src/master/
 
     - MooDy
+        https://github.com/johannep/moodyAPI
+
+        CCP-WSI repository: https://www.ccp-wsi.ac.uk
         OpenFOAM-v2012 (http://dx.doi.org/10.1007/s40722-022-00263-w)
 
-        https://github.com/johannep/moodyAPI
-        CCP-WSI repository: https://www.ccp-wsi.ac.uk
 
     - In rigidBodyDynamics library:
         a) In rigidBodyModel/rigidBodyModel.H
