@@ -8,10 +8,6 @@
 
 ## 11:
     - foamMooring
-        https://gitlab.com/hfchen20/foamMooring
-            ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
-
-            docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work jarrodsinclair/openfoam_2.3.1
 
         - map++
             https://bitbucket.org/mmasciola/map-plus-plus/src/master/
