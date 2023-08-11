@@ -1,3 +1,7 @@
+# 0. docker
+https://docs.docker.com/get-started/
+
+
 # 1. pjt
 삼성, 권호철 상무
     수의계약
@@ -21,7 +25,6 @@ TESolution, 이승우 전무
 
 # 2. SW
 sudo ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
-
 
 eigen
 boost
@@ -141,13 +144,45 @@ CFD simulation of floating body motion with mooring dynamics:
         : waves2foam is only compatible with openfoamv1606
         : oversetmesh
 
-    - MoorDyn
+## foamMooring
+
+## MoorDyn
         https://github.com/FloatingArrayDesign/MoorDyn
 
-    - map++
+## map++
         https://bitbucket.org/mmasciola/map-plus-plus/src/master/
+        https://map-plus-plus.readthedocs.io/en/latest/ref.html
 
-    - MooDy
+            Installing BLAS and LAPACK packages
+                https://www.netlib.org/blas/
+                https://www.netlib.org/lapack/
+
+                https://github.com/Reference-LAPACK/lapack
+
+                sudo apt-get install libblas-dev liblapack-dev
+                sudo apt-get install gfortran
+                sudo apt-get install libatlas-base-dev
+
+                sudo apt install libblas-dev
+
+                sudo apt update
+                sudo apt install liblapack3
+                sudo apt install liblapack-dev
+                sudo apt install libopenblas-base
+                sudo apt install libopenblas-dev
+                sudo apt install liblapacke-dev
+                sudo apt install liblapack-dev
+
+
+### blass
+    CPU throttling: off
+        sudo apt-get install cpufrequtils
+        cpufreq-set -g performance <CPU number>
+            cat /proc/cpuinfo
+
+    sudo apt-get install gfortran
+
+## MooDy
         https://github.com/johannep/moodyAPI
 
         CCP-WSI repository: https://www.ccp-wsi.ac.uk
@@ -161,3 +196,6 @@ CFD simulation of floating body motion with mooring dynamics:
             //-Remove const specifier for applyRestraints() method
 
 # -1. https://hatarilabs.com/ih-en/floating-object-stability-modeling-with-openfoam
+
+# FAST
+https://www.nrel.gov/wind/nwtc.html

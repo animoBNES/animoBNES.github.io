@@ -1,9 +1,106 @@
+# schedule
+## 10:
+    - wolf
+        - multiphase
+            - GT1
+            - GT2
+        - naval
 
-# PHILIPPINES SAN ROQUE FPV PROJECT
+## 11:
+    - foamMooring
+        https://gitlab.com/hfchen20/foamMooring
+            ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
 
-- the 150 MWac San Roque floating solar PV plant
+            docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work jarrodsinclair/openfoam_2.3.1
+
+        - map++
+            https://bitbucket.org/mmasciola/map-plus-plus/src/master/
+            https://map-plus-plus.readthedocs.io/en/latest/ref.html
+        - MoorDyn
+            https://github.com/FloatingArrayDesign/MoorDyn
+
+        - MooDy
+            https://github.com/johannep/moodyAPI
+
+            CCP-WSI repository: https://www.ccp-wsi.ac.uk
+            OpenFOAM-v2012 (http://dx.doi.org/10.1007/s40722-022-00263-w)
+
+
+    - wave2Foam
+
+## 12:
+## 13: finalizing
+## 14: submit
+
+
+# question and clarification
+
+권호철 프로님께,
+
+필리핀 San Roque 수상태양광 CFD 견적을 요청해 주셔서 감사합니다.
+
+과업과 관련되어 다음과 같은 문의 사항이 있습니다.
+
+1. 과업의 범위
+    1) 해석 대상 구조물
+        지정해 주시는 하나의 대표 구조물 (Floating PV island type I 혹은 type II)에 대하여 해석을 수행하려고 합니다.
+
+    2) 해석 조건
+        공유해 주신 Developer의 Feasibility Study 보고서 (SRPC 150MW FPV Feasibility Study Report_Final.pdf)의 table 3-16: Design Parameters를 바탕으로 해석을 수행하려고 합니다.
+
+        - ~~파고 0.5 m 는 구조물에 비해 너무 낮아 보입니다.~~
+            : ~~해석에서 파랑의 영향이 매우 작게 나타날 수 있습니다.~~
+
+        - ~~파고에 비해 풍속 75 m/s 는 매우 큰 값으로 보입니다.~~
+
+
+# PHILIPPINES SAN ROQUE FPV FPV PROJECT
+    (floating photovoltaic)
+
+    - location: Philippines San Roque Dam, 16 08 34 N, 120 41 22 E
+
+    - design condition
+
+        - PV module
+            - 695 W
+            - 38.3 kg
+            - size [mm]: 2384 1303 33
+            - area [m^2]: 3.106352
+        - solar incidence angle [deg]: 10 / 32
+        - PV floating 1 unit = 12 PV modules (2 x 6)
+
+    - block layout overview
+        - group:
+            A - P
+        - No: 1 - 23
+            3
+    - block #3
+        - 695 W
+        - 1763 units
+        - 21156 ea (module)
+        - area: 65718 m^2
+        - size: 256 m
+            494 x 133
+        - capacity (DC): 14703 MW
+        - capacity (AC): 12567 MW
+
+        - deflection
+            650000
+
+
+## the 150 MWac San Roque floating solar PV plant
     (floating Solar photovoltaic)
 
+- L.W.L. = EL + 150 m
+- Water depth = 140 m
+- Standard Block
+
+- Max. Deflection
+    - horizontal 30.99 m
+    - angular 6.57 deg
+
+
+## spec new
 - the unit 260 kWDC Floating platform
     this block : 30 m x 60 m
 
@@ -34,26 +131,36 @@
 
     - 30 m distance
 
+## spec old
+- the unit 260 kWDC Floating platform
+    this block : 30 m x 60 m
 
+    - main floats
+    - secondary floats
+    - mooring floats
 
-question and clarification
+    - pins
+    - certain vertical movement flexibility of the block platform floating on the water.
 
-권호철 프로님께,
+    - 10 arrays (rows)
+    - 2 strings for each array
+    - 26 standard solar PV modules (500 Wp)
 
-필리핀 San Roque 수상태양광 CFD 견적을 요청해 주셔서 감사합니다.
+    - 500 Wp x 26 modules x 2 strings x 10 arrays = 260 kWDC
 
-과업과 관련되어 다음과 같은 문의 사항이 있습니다.
+- Floating solar islands
+    - 4.68 MWdc as Island Type I and
+        - 30 blocks ?? 18 blocks
+        - 7.8e6
+        - 183 m x 188 m (6 x 3)
+        - 650 ton
+    - 2.34 MWdc as Island Type II
+        - 16 blocks ?? 9 blocks
+        - 4.16e6
+        - 95 m x 183 m (3 x 3)
+        - 325 ton
 
-1. 과업의 범위
-    1) 해석 대상 구조물
-        지정해 주시는 하나의 대표 구조물 (Floating PV island type I 혹은 type II)에 대하여 해석을 수행하려고 합니다.
+    - 30 m distance
 
-    2) 해석 조건
-        공유해 주신 Developer의 Feasibility Study 보고서 (SRPC 150MW FPV Feasibility Study Report_Final.pdf)의 table 3-16: Design Parameters를 바탕으로 해석을 수행하려고 합니다.
-
-        - 파고 0.5 m 는 구조물에 비해 너무 낮아 보입니다.
-            : 해석에서 파랑의 영향이 매우 작게 나타날 수 있습니다.
-
-        - 파고에 비해 풍속 75 m/s 는 매우 큰 값으로 보입니다.
 
 
