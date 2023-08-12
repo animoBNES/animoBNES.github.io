@@ -19,6 +19,8 @@ TESolution, 이승우 전무
         text
 
 # 2. SW
+sudo chown sbkim:sbkim eun
+
 sudo ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
 
 eigen
@@ -28,11 +30,87 @@ lapack
 lapacke
 blas
 
-## vtk
-    https://docs.vtk.org/en/latest/build_instructions/index.html
+qt
+vtk
+pcl
 
+
+## vtk
+
+### 1
+https://docs.vtk.org/en/latest/build_instructions/index.html
+
+sudo apt install \
+build-essential \
+cmake \
+cmake-curses-gui \
+mesa-common-dev \
+mesa-utils \
+freeglut3-dev \
+ninja-build
+
+sudo apt install \
+build-essential \
+cmake \
+mesa-common-dev \
+mesa-utils \
+freeglut3-dev \
+python3-dev \
+python3-venv \
+git-core \
+ninja-build
+
+sudo apt install graphviz* doxygen
+
+#### graphviz* \
+
+#### Qt5
+https://download.qt.io/new_archive/qt/5.5/5.5.1/
+
+   sudo apt-get install libqt4-dev libvtk5-qt4-dev
+
+#### Qt6
+https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4
+
+#####
+    https://my.qt.io/profile
+
+    sbkim@tesolution.com
+    akrur0824!
+
+    sbkim.bnes@gmail.com
+    akrur0824!
+
+/home/sbkim/Qt
+
+sudo apt install qtcreator
+
+#### vtk
+mkdir -p ~/vtk/build
+cd ~/vtk/build
+ccmake -GNinja /home/sbkim/Work/sci/VTK-9.2.6
+
+cmake --build ~/vtk/build
+
+#### itk
+https://itk.org/download/
+
+
+
+### 2
+https://vtk.org/Wiki/VTK/Configure_and_Build
+
+
+
+
+mkdir -p ~/vtk/build
+cd ~/vtk/build
+<!-- ccmake -GNinja /data/animoBNES.github.io/floating/tools/vtk-master/source -->
+ccmake -GNinja /data/animoBNES.github.io/floating/tools/vtk-master
     cmake --build ~/vtk/build
 
+cd /data/animoBNES.github.io/floating/tools/foamMooring
+cd /data/animoBNES.github.io/floating/tools/vtk-master
 
 ## Installing BLAS and LAPACK packages
         https://www.netlib.org/blas/
@@ -163,23 +241,27 @@ blas
     https://gitlab.com/hfchen20/foamMooring
     https://doi.org/10.1016/j.apor.2022.103210
 
-    ./openfoam-docker -default -data=/home/sbkim/Work
+## sudo chown sbkim:sbkim eun
+
+//        ./openfoam-docker -default -data=/home/sbkim/Work
 //        ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
 //        docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work opencfd/openfoam-default
 
-        sudo apt update
-        sudo apt install git cmake vtk9
-        //        sudo apt install libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
+    cd ~/Work/docker
+    ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
+    cd /data/eun
 
-        git clone https://gitlab.com/hfchen20/foamMooring.git
+        sudo apt update
+        sudo apt install git cmake vtk9 liblapacke-dev
+        //        sudo apt install libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
 
         chmod 600 ~/.ssh/*
 
+        git clone https://gitlab.com/hfchen20/foamMooring.git
+
 
 SET(VTK_DIR "/usr/include/boost/compute/interop/vtk" CACHE PATH "VTK directory override" FORCE)
-
 SET(VTK_DIR "/usr/include/vtk-5.8" CACHE PATH "VTK directory override" FORCE)
-
 
 CMake Error at CMakeLists.txt:50 (find_package):
   By not providing "FindVTK.cmake" in CMAKE_MODULE_PATH this project has
@@ -195,7 +277,6 @@ CMake Error at CMakeLists.txt:50 (find_package):
   Add the installation prefix of "VTK" to CMAKE_PREFIX_PATH or set "VTK_DIR"
   to a directory containing one of the above files.  If "VTK" provides a
   separate development package or SDK, be sure it has been installed.
-
 
 -- Configuring incomplete, errors occurred!
 See also "/data/animoBNES.github.io/floating/tools/foamMooring/thirdParty/MoorDyn
@@ -215,12 +296,12 @@ VTK_DIR=path_to_VTK/bin as
         https://bitbucket.org/mmasciola/map-plus-plus/src/master/
         https://map-plus-plus.readthedocs.io/en/latest/ref.html
 
+
 ## 5.3 MooDy
         https://github.com/johannep/moodyAPI
 
         CCP-WSI repository: https://www.ccp-wsi.ac.uk
         OpenFOAM-v2012 (http://dx.doi.org/10.1007/s40722-022-00263-w)
-
 
 # -2. https://www.cfd-online.com/Forums/openfoam-solving/244338-openfoam-mooring-line.html
 simulate floating body motions under regular waves:

@@ -10,23 +10,26 @@
     - foamMooring
 
         - map++
-            https://bitbucket.org/mmasciola/map-plus-plus/src/master/
-            https://map-plus-plus.readthedocs.io/en/latest/ref.html
-        - MoorDyn
-            https://github.com/FloatingArrayDesign/MoorDyn
-
-        - MooDy
-            https://github.com/johannep/moodyAPI
-
-            CCP-WSI repository: https://www.ccp-wsi.ac.uk
-            OpenFOAM-v2012 (http://dx.doi.org/10.1007/s40722-022-00263-w)
-
+x        - MoorDyn
+x        - MooDy
 
     - wave2Foam
 
 ## 12:
+    - foamMooring
+
+        - vtk
+            - cmake
+            - qt
+
+        - linked structure
+
 ## 13: finalizing
+
+
 ## 14: submit
+## 15: submit
+## 16: submit
 
 
 # question and clarification
