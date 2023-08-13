@@ -84,20 +84,27 @@ x        - MooDy
         - capacity (AC): 12567 MW
 
         - deflection
-            650000
+            650 m
 
 
 ## the 150 MWac San Roque floating solar PV plant
     (floating Solar photovoltaic)
 
+- wave height = 0.5 m
+- wind speed = 75 m/s
+
 - L.W.L. = EL + 150 m
+    - FH: 250 - 290 0
 - Water depth = 140 m
-- Standard Block
+    100 - 165
+- water level fluctuation = 65 m
 
-- Max. Deflection
-    - horizontal 30.99 m
-    - angular 6.57 deg
+- Standard Block #1
+    - Max. Deflection
+        - horizontal 30.99 m
+        - angular 6.57 deg
 
+##
 
 ## spec new
 - the unit 260 kWDC Floating platform
