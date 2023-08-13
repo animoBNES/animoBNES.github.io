@@ -7,6 +7,14 @@ cd /data/eun/foamMooring
 git pull
 
 # tutorial
+/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318/eun/foamMooring/tutorial/sixDoF_2D
+
+deformMesh/
+    run
+overset/
+
+cd /data/eun/floating
+
 
 
 # setup
