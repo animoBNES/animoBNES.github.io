@@ -18,130 +18,8 @@ TESolution, 이승우 전무
         thesis
         text
 
-# 2. SW
-sudo chown sbkim:sbkim eun
 
-sudo ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
-
-eigen
-boost
-vtk
-lapack
-lapacke
-blas
-
-qt
-vtk
-pcl
-
-
-## vtk
-
-### 1
-https://docs.vtk.org/en/latest/build_instructions/index.html
-
-sudo apt install \
-build-essential \
-cmake \
-cmake-curses-gui \
-mesa-common-dev \
-mesa-utils \
-freeglut3-dev \
-ninja-build
-
-sudo apt install \
-build-essential \
-cmake \
-mesa-common-dev \
-mesa-utils \
-freeglut3-dev \
-python3-dev \
-python3-venv \
-git-core \
-ninja-build
-
-sudo apt install graphviz* doxygen
-
-#### graphviz* \
-
-#### Qt5
-https://download.qt.io/new_archive/qt/5.5/5.5.1/
-
-   sudo apt-get install libqt4-dev libvtk5-qt4-dev
-
-#### Qt6
-https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4
-
-#####
-    https://my.qt.io/profile
-
-    sbkim@tesolution.com
-    akrur0824!
-
-    sbkim.bnes@gmail.com
-    akrur0824!
-
-/home/sbkim/Qt
-
-sudo apt install qtcreator
-
-#### vtk
-mkdir -p ~/vtk/build
-cd ~/vtk/build
-ccmake -GNinja /home/sbkim/Work/sci/VTK-9.2.6
-
-cmake --build ~/vtk/build
-
-#### itk
-https://itk.org/download/
-
-
-
-### 2
-https://vtk.org/Wiki/VTK/Configure_and_Build
-
-
-
-
-mkdir -p ~/vtk/build
-cd ~/vtk/build
-<!-- ccmake -GNinja /data/animoBNES.github.io/floating/tools/vtk-master/source -->
-ccmake -GNinja /data/animoBNES.github.io/floating/tools/vtk-master
-    cmake --build ~/vtk/build
-
-cd /data/animoBNES.github.io/floating/tools/foamMooring
-cd /data/animoBNES.github.io/floating/tools/vtk-master
-
-## Installing BLAS and LAPACK packages
-        https://www.netlib.org/blas/
-        https://www.netlib.org/lapack/
-
-        https://github.com/Reference-LAPACK/lapack
-
-        sudo apt-get install libblas-dev liblapack-dev
-        sudo apt-get install gfortran
-        sudo apt-get install libatlas-base-dev
-
-        sudo apt install libblas-dev
-
-        sudo apt update
-        sudo apt install liblapack3
-        sudo apt install liblapack-dev
-        sudo apt install libopenblas-base
-        sudo apt install libopenblas-dev
-        sudo apt install liblapacke-dev
-        sudo apt install liblapack-dev
-
-## blass
-    CPU throttling: off
-        sudo apt-get install cpufrequtils
-        cpufreq-set -g performance <CPU number>
-            cat /proc/cpuinfo
-
-    sudo apt-get install gfortran
-
-
-# 2.1 wolf
+# 2. wolf
     sudo usermod -aG docker $(whoami)
     sudo sh -c "wget http://dl.openfoam.org/docker/openfoam11-linux -O /usr/bin/openfoam11-linux"
     sudo chmod 755 /usr/bin/openfoam11-linux
@@ -163,9 +41,9 @@ cd /data/animoBNES.github.io/floating/tools/vtk-master
 
     exit
 
+## 2.1 multiphase
 
-## 2.1.1 multiphase
-###
+## 2.2 naval
 
 
 # 3. wave2Foam
@@ -241,48 +119,47 @@ cd /data/animoBNES.github.io/floating/tools/vtk-master
     https://gitlab.com/hfchen20/foamMooring
     https://doi.org/10.1016/j.apor.2022.103210
 
+cd /data/animoBNES.github.io/floating/tools/foamMooring
+
 ## sudo chown sbkim:sbkim eun
 
 //        ./openfoam-docker -default -data=/home/sbkim/Work
 //        ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
 //        docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work opencfd/openfoam-default
 
+## docker
     cd ~/Work/docker
     ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
     cd /data/eun
 
+### apt
         sudo apt update
-        sudo apt install git cmake vtk9 liblapacke-dev
+        sudo apt upgrade
+
+        sudo apt install git cmake liblapacke-dev
+        sudo apt install vtk9
         //        sudo apt install libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
 
         chmod 600 ~/.ssh/*
 
         git clone https://gitlab.com/hfchen20/foamMooring.git
 
+sudo apt install \
+build-essential \
+cmake \
+cmake-curses-gui \
+mesa-common-dev \
+mesa-utils \
+freeglut3-dev \
+python3-dev \
+python3-venv \
+git-core \
+ninja-build
 
-SET(VTK_DIR "/usr/include/boost/compute/interop/vtk" CACHE PATH "VTK directory override" FORCE)
-SET(VTK_DIR "/usr/include/vtk-5.8" CACHE PATH "VTK directory override" FORCE)
+sudo apt install graphviz* doxygen
 
-CMake Error at CMakeLists.txt:50 (find_package):
-  By not providing "FindVTK.cmake" in CMAKE_MODULE_PATH this project has
-  asked CMake to find a package configuration file provided by "VTK", but
-  CMake did not find one.
-
-  Could not find a package configuration file provided by "VTK" with any of
-  the following names:
-
-    VTKConfig.cmake
-    vtk-config.cmake
-
-  Add the installation prefix of "VTK" to CMAKE_PREFIX_PATH or set "VTK_DIR"
-  to a directory containing one of the above files.  If "VTK" provides a
-  separate development package or SDK, be sure it has been installed.
-
--- Configuring incomplete, errors occurred!
-See also "/data/animoBNES.github.io/floating/tools/foamMooring/thirdParty/MoorDyn
-
-
-VTK_DIR=path_to_VTK/bin as
+#### vtk
+sudo apt install libvtk9-dev
 
 
 ## 5.0

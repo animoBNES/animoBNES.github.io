@@ -1,0 +1,35 @@
+# foamMooring
+    https://gitlab.com/hfchen20/foamMooring
+    https://doi.org/10.1016/j.apor.2022.103210
+
+<!-- cd /data/animoBNES.github.io/floating/tools/foamMooring -->
+cd /data/eun/foamMooring
+git pull
+
+# tutorial
+
+
+# setup
+cd ~/Work/docker
+./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
+
+cd /data/eun/
+chmod 600 ~/.ssh/*
+
+sudo apt update
+sudo apt upgrade
+
+sudo apt install libvtk9-dev
+sudo apt install vtk9
+
+git clone https://gitlab.com/hfchen20/foamMooring.git
+git pull
+
+sudo apt install build-essential cmake cmake-curses-gui mesa-common-dev mesa-utils freeglut3-dev python3-dev python3-venv git-core ninja-build
+sudo apt install graphviz* doxygen
+
+cd /data/eun/
+cd foamMooring/
+./Allwmake
+
+cd /data/eun/floating
