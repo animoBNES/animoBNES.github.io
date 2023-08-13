@@ -132,6 +132,7 @@ cd /data/animoBNES.github.io/floating/tools/foamMooring
 ## docker
     cd ~/Work/docker
     ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
+    ./openfoam-docker -default -data=/
     cd /data/eun
 
 ### apt
@@ -139,13 +140,14 @@ cd /data/animoBNES.github.io/floating/tools/foamMooring
         sudo apt upgrade
 
         sudo apt install git cmake liblapacke-dev
-        sudo apt install vtk9
+x        sudo apt install vtk9
         //        sudo apt install libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
 
-        chmod 600 ~/.ssh/*
+x        chmod 600 ~/.ssh/*
 
         git clone https://gitlab.com/hfchen20/foamMooring.git
 
+x
 sudo apt install \
 build-essential \
 cmake \
@@ -158,6 +160,7 @@ python3-venv \
 git-core \
 ninja-build
 
+x
 sudo apt install graphviz* doxygen
 
 #### vtk
