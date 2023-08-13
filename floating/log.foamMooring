@@ -41,3 +41,10 @@ cd foamMooring/
 ./Allwmake
 
 cd /data/eun/floating
+
+# wolf
+## dynamic mesh
+
+### solver
+sol
+grep -r dynamicFvMesh.H

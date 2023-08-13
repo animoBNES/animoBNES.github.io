@@ -1,0 +1,128 @@
+# fvSolution
+    /system/
+
+momentumPredictor yes;
+- Set to yes for high Reynolds flows, where convection dominates (default value is yes).
+
+nOuterCorrectors 2;
+- You should do at least 1 corrector step (equivalent to PISO).
+- If you are dealing with moving bodies, LES simulations, or if the CFL number is higher than 1,
+    - do a minimum of 2 outer correctors.
+- For best results (specially with moving bodies),
+    - do at least 5 correctors.
+
+## overset
+- You should do at least 2 corrector step.
+- If you are dealing with moving bodies, LES simulations, or if the CFL number is higher than 1,
+    - do a minimum of 3 correctors.
+- For best results (specially with moving bodies),
+    - do at least 5 correctors.
+
+nCorrector 3;
+- It is recommended to do at least 2 corrector steps.
+- Use 3 or more corrector steps for highly transient flows or strongly coupled problems.
+- This correction improves accuracy and stability.
+
+## overset
+- It is recommended to do at least 2 corrector steps.
+- Use 3 or more corrector steps for highly transient flows or strongly coupled problems.
+- This correction improves accuracy and stability.
+
+
+nNonOrthogonalCorrectors 1;
+- It is recommended to do at least 1 corrector step.
+- Increase the value to at least 2 for bad quality meshes.
+- Increase the value to at least 2 if you expect large mesh deformations.
+
+correctPhi yes;
+- Flux corrections to ensure continuity.
+- Default value is yes.
+- Required during start-up, restart, mesh-motion, etc.,
+    - when non-conservative fluxes may adversely affect the solution.
+- This is particularly important for VoF and other multi-phase solvers in which
+    - non-conservative fluxes cause unboundedness of the phase-fraction.
+
+## if you are dealing with overset meshes
+
+
+
+
+#
+- CFL (Courant–Friedrichs–Lewy) number
+- LTS (pseudo-transient simulations)
+
+
+# source
+
+## Foundation
+### source code of all the mesh motion libraries in the directories:
+    OpenFOAM-9/src/dynamicFvMesh
+    OpenFOAM-9/src/dynamicMesh
+    OpenFOAM-9/src/fvMotionSolver
+    OpenFOAM-9/src/rigidBodyDynamics
+    OpenFOAM-9/src/rigidBodyMeshMotion
+    OpenFOAM-9/src/rigidBodyState
+    OpenFOAM-9/src/sixDoFRigidBodyMotion
+    OpenFOAM-9/src/sixDoFRigidBodyState
+    OpenFOAM-9/src/topoChangerFvMesh
+
+### source code of the prescribed patch motions in the directory:
+    OpenFOAM-9/src/fvMotionSolver/pointPatchFields/derived
+
+### source code of the restraints/constraints of the rigid body motion solvers
+    (6DoF and rigid body dynamics approaches) in the directory:
+    OpenFOAM-9/src/sixDoFRigidBodyMotion/sixDoFRigidBodyMotion
+    OpenFOAM-9/src/rigidBodyDynamics
+
+### source code of the mesh diffusivity models in the directory:
+    OpenFOAM-9/src/fvMotionSolver/motionDiffusivity
+
+### source code of the mesh motion solvers in the directory
+    OpenFOAM-9/src/fvMotionSolver/fvMotionSolvers
+
+## ESI
+    OpenFOAM-v2106/src/
+
+### overset
+    OpenFOAM-v2112/src/overset
+
+
+# solver
+
+incompressible/pimpleFoam/pimpleFoam.C:#include "dynamicFvMesh.H"
+incompressible/pimpleFoam/overPimpleDyMFoam/overPimpleDyMFoam.C:#include "dynamicFvMesh.H"
+incompressible/simpleFoam/overSimpleFoam/overSimpleFoam.C:#include "dynamicFvMesh.H"
+combustion/PDRFoam/PDRFoamAutoRefine.C:#include "dynamicFvMesh.H"
+combustion/XiFoam/XiDyMFoam/XiDyMFoam.C:#include "dynamicFvMesh.H"
+lagrangian/kinematicParcelFoam/kinematicParcelFoam.C:#include "dynamicFvMesh.H"
+lagrangian/uncoupledKinematicParcelFoam/uncoupledKinematicParcelDyMFoam/uncoupledKinematicParcelDyMFoam.C:#include "dynamicFvMesh.H"
+lagrangian/icoUncoupledKinematicParcelFoam/icoUncoupledKinematicParcelDyMFoam/icoUncoupledKinematicParcelDyMFoam.C:#include "dynamicFvMesh.H"
+lagrangian/DPMFoam/DPMDyMFoam/DPMDyMFoam.C:#include "dynamicFvMesh.H"
+lagrangian/reactingParcelFoam/reactingParcelFoam.C:#include "dynamicFvMesh.H"
+lagrangian/sprayFoam/sprayDyMFoam/sprayDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/interPhaseChangeFoam/interPhaseChangeDyMFoam/interPhaseChangeDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/interPhaseChangeFoam/overInterPhaseChangeDyMFoam/overInterPhaseChangeDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/cavitatingFoam/cavitatingDyMFoam/cavitatingDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/multiphaseInterFoam/multiphaseInterFoam.C:#include "dynamicFvMesh.H"
+multiphase/interIsoFoam/interIsoFoam.C:#include "dynamicFvMesh.H"
+multiphase/interCondensatingEvaporatingFoam/interCondensatingEvaporatingFoam.C:#include "dynamicFvMesh.H"
+multiphase/icoReactingMultiphaseInterFoam/icoReactingMultiphaseInterFoam.C:#include "dynamicFvMesh.H"
+multiphase/compressibleInterFoam/compressibleInterDyMFoam/compressibleInterDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/overCompressibleInterDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/compressibleInterFoam/compressibleInterIsoFoam/compressibleInterIsoFoam.C:#include "dynamicFvMesh.H"
+multiphase/potentialFreeSurfaceFoam/potentialFreeSurfaceDyMFoam/potentialFreeSurfaceDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/interFoam/interMixingFoam/interMixingFoam.C:#include "dynamicFvMesh.H"
+multiphase/interFoam/overInterDyMFoam/overInterDyMFoam.C:#include "dynamicFvMesh.H"
+multiphase/interFoam/interFoam.C:#include "dynamicFvMesh.H"
+basic/laplacianFoam/overLaplacianDyMFoam/overLaplacianDyMFoam.C:#include "dynamicFvMesh.H"
+basic/potentialFoam/overPotentialFoam/overPotentialFoam.C:#include "dynamicFvMesh.H"
+heatTransfer/solidFoam/solidFoam.C:#include "dynamicFvMesh.H"
+heatTransfer/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam.C:#include "dynamicFvMesh.H"
+heatTransfer/buoyantPimpleFoam/buoyantPimpleFoam.C:#include "dynamicFvMesh.H"
+heatTransfer/buoyantPimpleFoam/overBuoyantPimpleDyMFoam/overBuoyantPimpleDyMFoam.C:#include "dynamicFvMesh.H"
+compressible/sonicFoam/sonicDyMFoam/sonicDyMFoam.C:#include "dynamicFvMesh.H"
+compressible/rhoPimpleFoam/overRhoPimpleDyMFoam/overRhoPimpleDyMFoam.C:#include "dynamicFvMesh.H"
+compressible/rhoPimpleFoam/rhoPimpleFoam.C:#include "dynamicFvMesh.H"
+compressible/rhoSimpleFoam/overRhoSimpleFoam/overRhoSimpleFoam.C:#include "dynamicFvMesh.H"
+compressible/rhoCentralFoam/rhoCentralFoam.C:#include "dynamicFvMesh.H"
+
