@@ -18,7 +18,6 @@ TESolution, 이승우 전무
         thesis
         text
 
-
 # 2. wolf
     sudo usermod -aG docker $(whoami)
     sudo sh -c "wget http://dl.openfoam.org/docker/openfoam11-linux -O /usr/bin/openfoam11-linux"
@@ -43,17 +42,55 @@ TESolution, 이승우 전무
 
 ## 2.0 dynamics mesh
 
+### solver
+sol
+grep -r dynamicFvMesh.H
+
+
 ## 2.1 multiphase
 
 ## 2.2 naval
 
 
-# 3. wave2Foam
+# 3. IHFoam & olaFlow
+
+## IHFoam
+    cd ~/Work/docker
+    ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
+    ./openfoam-docker -default -data=/
+    cd /data/eun
+
+dirS=/usr/lib/openfoam/openfoam2306
+dirD=/data/eun/IHFoamCourse
+
+// cp –r ~/OpenFOAM-v1812/tutorials/multiphase/overInterDyMFoam/floatingBody ~/IHFoamCourse/
+mkdir IHFoamCourse/
+
+cp -r "$dirS/tutorials/multiphase/overInterDyMFoam/floatingBody" "$dirD"/
+
+cp -r "$dirD"/floatingBody "$dirD"/overSetWaves
+
+// cp –r ~/OpenFOAM-v1806/tutorials/multiphase/interFoam/RAS/mixerVesselAMI/system/snappyHexMeshDict ~/IHFoamCourse/overSetWaves/system/
+cp -r "$dirS/tutorials/multiphase/interFoam/RAS/mixerVesselAMI/system/snappyHexMeshDict" "$dirD"/overSetWaves/floatingBody/system/
+
+$dirS/tutorials/multiphase/overInterDyMFoam/floatingBody IHFoamCourse/
+
+// source ~/OpenFOAM/OpenFOAM-v1812/etc/bashrc
+cd IHFoamCourse/overSetWaves
+./Allclean
+
+
+# 6. olaFlow
+
+
+
+
+# 4. wave2Foam
 0) sudo apt instal subversion
 1) svn co http://svn.code.sf.net/p/openfoam-extend/svn/trunk/Breeder_1.6/other/waves2Foam
 2) sudo apt-get install libgsl0-dev
 
-## 3.1 shear current theory: Koray Deniz Göral, Håkan Nilsson
+## 4.1 shear current theory: Koray Deniz Göral, Håkan Nilsson
         ESI 2012
             docker
                 vc
@@ -96,7 +133,7 @@ TESolution, 이승우 전무
             porousWaveFoam
             waveDyMFoam
 
-## 3.2 manual: Niels Gjøl Jacobsen
+## 4.2 manual: Niels Gjøl Jacobsen
         OF-3.0, OF-4.0 x
         OF+-3.0, OF+-1606, OF+-1612 x
         FE-3.1, FE-3.2, FE-4.0
@@ -114,7 +151,6 @@ TESolution, 이승우 전무
         https://hub.docker.com/r/dicehub/openfoam
 
 
-# 4. olaFlow
 
 
 # 5. foamMooring
