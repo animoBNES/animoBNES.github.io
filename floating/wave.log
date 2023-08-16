@@ -1,0 +1,71 @@
+# 1. https://gitlab.com/hfchen20/foamMooring
+
+./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
+./openfoam-docker -v2212 -default -data=/media/sbkim/urban/urban/hines
+
+mkdir -p $WM_PROJECT_USER_DIR
+cd $WM_PROJECT_USER_DIR
+git clone https://gitlab.com/hfchen20/foamMooring.git
+cd foamMooring
+
+sudo apt update
+sudo apt install libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
+
+sudo apt install git
+
+git thirdParty
+
+    VTKConfig.cmake
+    vtk-config.cmake
+
+
+https://github.com/FloatingArrayDesign/MoorDyn
+
+
+boost
+    https://www.boost.org/users/download/
+eigen
+flann
+vtk
+    sudo apt install python3-vtk9
+    sudo apt install python3-vtk7
+
+
+sudo apt install \
+build-essential \
+cmake \
+cmake-curses-gui \
+mesa-common-dev \
+mesa-utils \
+freeglut3-dev \
+ninja-build
+
+mkdir -p ~/vtk/build
+cd ~/vtk/build
+ccmake -GNinja ../path/to/vtk/source
+
+
+ssh -T -p 443 git@ssh.github.com
+
+
+ssh-keygen -t rsa -C “sb”
+
+
+        ssh-keygen -t rsa -C “elpizoBNES@gmail.com”
+        cat ~/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCWhlO74NvooNzcYth93U+Cle4JtGeHwGbz9B9clUB3KlZrI/BTQeMZ/0eFgSIou8DsTbbI9gs6tx4KY662F11SljguOmFB87M7ilbSHYsid5WrWgPDUlhFM/tW8NWFAheuRGmh6WWPUl2Y9RGF9P7vhihKWrUhi0k9MtgHdYFlAKgqgmFlfLIsg8NI89FEspTqc9kt7D9UjBpYc3QzpcLCnH/RDnDm1SiHjykOQ9jE9vkeSwGeDihwNwboGf5RI0DMGpL+HWiF6j/3/o28Ifd3JJouslV77TJjgjLBRgwjydwmf8QzYFDR6IIPPJyTOTB+4kIw7d0MR6JKgA0NixSDb4gpDnqswelZ4N9MY26mTnARvykKo5qXLadtfa5xtJCqyga+F64SsV4XoAV6Tdf0sw7pjhn3aLBynuGg62CQMVk4edU02rIxbKiooJZ8dux59Yaxu7vjtxN3xidUPccbJ6nbuRQ0na1LzBAmjCnTbrI1UmDWNV3k+pGKopXcij8= “sbkim.bnes@gmail.com”
+
+
+
+
+ls $FOAM_USER_LIBBIN
+
+
+
+
+
+
+
+
+
+
