@@ -47,6 +47,10 @@ TESolution, 이승우 전무
 sol
 grep -r dynamicFvMesh.H
 
+CFL
+LTS (pseudo-transient simulations)
+
+
 
 ## 2.1 multiphase
 
@@ -64,6 +68,7 @@ grep -r dynamicFvMesh.H
 
 dirS=/usr/lib/openfoam/openfoam2306
 dirD=/data/eun/IHFoamCourse
+
 
 // cp –r ~/OpenFOAM-v1812/tutorials/multiphase/overInterDyMFoam/floatingBody ~/IHFoamCourse/
 mkdir IHFoamCourse/
