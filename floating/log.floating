@@ -18,6 +18,7 @@ TESolution, 이승우 전무
         thesis
         text
 
+
 # 2. wolf
     sudo usermod -aG docker $(whoami)
     sudo sh -c "wget http://dl.openfoam.org/docker/openfoam11-linux -O /usr/bin/openfoam11-linux"
@@ -48,6 +49,7 @@ grep -r dynamicFvMesh.H
 
 
 ## 2.1 multiphase
+
 
 ## 2.2 naval
 
@@ -80,9 +82,7 @@ cd IHFoamCourse/overSetWaves
 ./Allclean
 
 
-# 6. olaFlow
-
-
+## olaFlow
 
 
 # 4. wave2Foam
@@ -151,8 +151,6 @@ cd IHFoamCourse/overSetWaves
         https://hub.docker.com/r/dicehub/openfoam
 
 
-
-
 # 5. foamMooring
     https://gitlab.com/hfchen20/foamMooring
     https://doi.org/10.1016/j.apor.2022.103210
@@ -204,6 +202,10 @@ sudo apt install libvtk9-dev
 
 
 ## 5.0
+        https://doi.org/10.1016/j.apor.2022.103210
+        https://gitlab.com/hfchen20/foamMooring
+
+
     ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
     docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work jarrodsinclair/openfoam_2.3.1
 
@@ -220,6 +222,7 @@ sudo apt install libvtk9-dev
 
         CCP-WSI repository: https://www.ccp-wsi.ac.uk
         OpenFOAM-v2012 (http://dx.doi.org/10.1007/s40722-022-00263-w)
+
 
 # -2. https://www.cfd-online.com/Forums/openfoam-solving/244338-openfoam-mooring-line.html
 simulate floating body motions under regular waves:
