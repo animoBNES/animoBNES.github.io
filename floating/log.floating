@@ -85,12 +85,10 @@ mkdir IHFoamCourse/
 
 cp -r "$dirS/tutorials/multiphase/overInterDyMFoam/floatingBody" "$dirD"/
 
-cp -r "$dirD"/floatingBody "$dirD"/overSetWaves
+// cp -r "$dirD"/floatingBody "$dirD"/overSetWaves
 
 // cp –r ~/OpenFOAM-v1806/tutorials/multiphase/interFoam/RAS/mixerVesselAMI/system/snappyHexMeshDict ~/IHFoamCourse/overSetWaves/system/
 cp -r "$dirS/tutorials/multiphase/interFoam/RAS/mixerVesselAMI/system/snappyHexMeshDict" "$dirD"/overSetWaves/floatingBody/system/
-
-$dirS/tutorials/multiphase/overInterDyMFoam/floatingBody IHFoamCourse/
 
 // source ~/OpenFOAM/OpenFOAM-v1812/etc/bashrc
 cd IHFoamCourse/overSetWaves
