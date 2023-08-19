@@ -62,13 +62,23 @@ LTS (pseudo-transient simulations)
 
 ## IHFoam
     cd ~/Work/docker
-    ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
-    ./openfoam-docker -default -data=/
+    echo $HOSTNAME
+    // if [ "$HOSTNAME" = neowindDL ]; then
+    if [ "$HOSTNAME" = neowindaria ]; then
+        idN=true
+    else
+        idN=false
+    fi
+    echo "$idN"
+    if [ "${idN:-false}" = true ]; then
+        ./openfoam-docker -default -data=/
+    else
+        ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
+    fi
     cd /data/eun
 
 dirS=/usr/lib/openfoam/openfoam2306
 dirD=/data/eun/IHFoamCourse
-
 
 // cp –r ~/OpenFOAM-v1812/tutorials/multiphase/overInterDyMFoam/floatingBody ~/IHFoamCourse/
 mkdir IHFoamCourse/
