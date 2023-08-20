@@ -19,17 +19,19 @@ cd /data/eun/floating
 
 # setup
 cd ~/Work/docker
+./openfoam-docker -default -data=/
 ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
 
 cd /data/eun/
 chmod 600 ~/.ssh/*
 
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 
-sudo apt install libvtk9-dev
-sudo apt install vtk9
+sudo apt install -y libvtk9-dev
+sudo apt install -y vtk9
 
+sudo apt-get install -y git cmake liblapacke-dev libvtk9-dev
 git clone https://gitlab.com/hfchen20/foamMooring.git
 git pull
 
