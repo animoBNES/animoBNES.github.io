@@ -197,21 +197,35 @@ cd /data/animoBNES.github.io/floating/tools/foamMooring
     if [ "${idN:-false}" = true ]; then
         ./openfoam-docker -default -data=/
     else
-        ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
+        docker container run -u 0 -ti --rm -v ~/Work:/Work -w /Work opencfd/openfoam-default
+        docker container run -u 0 -ti --rm -v /media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318:/data -w /data opencfd/openfoam-default
+x        ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
     fi
     cd /data/eun
 
 ### apt
-        sudo apt update
-        sudo apt upgrade
+        ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
 
-        sudo apt install git cmake liblapacke-dev
+        RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
+
+        sudo apt update
+        sudo apt upgrade -y
+
+        sudo apt install -y git cmake liblapacke-dev
+        sudo apt install -y libvtk9-dev
+
+        mkdir -p $WM_PROJECT_USER_DIR
+        cd $WM_PROJECT_USER_DIR
+        git clone https://gitlab.com/hfchen20/foamMooring.git
+        cd foamMooring
+
+        sed -i -e 's/-DUSE_VTK=OFF/-DUSE_VTK=ON/g' Allwmake
+
+
 x        sudo apt install vtk9
         //        sudo apt install libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
 
 x        chmod 600 ~/.ssh/*
-
-        git clone https://gitlab.com/hfchen20/foamMooring.git
 
 x
 sudo apt install \
