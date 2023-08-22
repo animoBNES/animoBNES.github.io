@@ -1,0 +1,241 @@
+Table 1
+
+Main features of three mooring line analysis codes.
+
+\begin{tabular}{|c|c|c|c|}
+\hline Code & MoorDyn & $\mathrm{MAP}++$ & Moody \\
+\hline Analysis type & Dynamic & Quasi-static & Dynamic \\
+\hline Model basis & Lumped-mass & Catenary equation & Finite element \\
+\hline Integration & Second-order Runge-Kutta & $\mathrm{N} / \mathrm{A}$ & Third-order Runge-Kutta \\
+\hline Programming & $\mathrm{C}++$, Fortran & C & $\mathrm{C}+$ \\
+\hline language & - Wrapper in C++, Fortran, Python, MATLAB & $\begin{array}{l}\text { - Wrapper in C, C++, Fortran, } \\
+\text { Python }\end{array}$ & - Wrapper in C++, Fortran, MATLAB \\
+\hline \multirow[t]{3}{*}{ Main features } & $\begin{array}{l}\text { Includes axial stiffness and internal damping forces, bending } \\
+\text { stiffness, line weight, buoyancy, seabed contact, and drag and } \\
+\text { inertia forces (Morison's equation) }\end{array}$ & $\begin{array}{l}\text { Includes axial elasticity, line } \\
+\text { weight, buoyancy, and seabed } \\
+\text { contact }\end{array}$ & $\begin{array}{l}\text { Includes axial stiffness and internal damping forces, } \\
+\text { line weight, buoyancy, seabed contact, and drag and } \\
+\text { inertia forces (Morison's equation) }\end{array}$ \\
+\hline & $\begin{array}{l}\text { - Fluid forces (current and waves) on lines are being } \\
+\text { implemented } \\
+\text { - Supports arbitrary line interconnections, clump weights and }\end{array}$ & $\begin{array}{l}\text { - Supports arbitrary line } \\
+\text { interconnections, clump weights } \\
+\text { and floats }\end{array}$ & $\begin{array}{l}\text { - Includes current and wave forces on lines } \\
+\text { - Supports submerged rigid bodies (modeled as points } \\
+\text { and cylinders) }\end{array}$ \\
+\hline & $\begin{array}{l}\text { floats, submerged rigid bodies } \\
+\text { - Ignores torsion }\end{array}$ & $\begin{array}{l}\text { - Ignores bending, torsion, and } \\
+\text { current and wave forces (drag \& } \\
+\text { inertia) }\end{array}$ & - Ignores bending and torsion \\
+\hline Source code & https://github.com/mattEhall/MoorDyn & $\begin{array}{l}\text { https://bitbucket.org/mmas } \\
+\text { ciola/map-plus-plus }\end{array}$ & Precompiled library \\
+\hline Documentation & https://moordyn.readthedocs.io/en/latest & $\begin{array}{l}\text { https://map-plus-plus.readth } \\
+\text { edocs.io/en/latest }\end{array}$ & https://github.com/johannep/moodyAPI \\
+\hline Reference & Hall and Goupee (2015); Hall (2020); Hall et al. (2021) & Masciola et al. (2013) & Palm et al. $(2016,2017)$ \\
+\hline
+\end{tabular}
+
+\section{Methodology}
+
+The present study adopts the open-source CFD toolbox OpenFOAM as the CFD model, and it mainly uses MoorDyn as the mooring dynamics model. To simulate the floating body motion within a reasonable amount of time, Reynolds-Averaged Navier-Stokes (RANS) equations are solved in the CFD flow solver. The various components required in the coupled CFD-mooring model are described in this section.
+
+\subsection{Free-surface flow solver}
+
+The interFoam solver in OpenFOAM is an air-water two-phase flow solver and is the basic free surface flow solver used in this study. It solves the RANS equations for two incompressible phases using a finite volume discretization and the Volume of Fluid (VOF) surface capturing method (Jasak, 1996; Rusche, 2002). The RANS equations describing mass continuity and conservation of momentum for an incompressible fluid are given by
+
+$\nabla \cdot \mathbf{U}=0$
+
+$\frac{\partial \rho \mathbf{U}}{\partial t}+\nabla \cdot(\rho \mathbf{U} \mathbf{U})-\nabla \cdot\left(\mu_{e f f} \nabla \mathbf{U}\right)=-\nabla p^{*}-\mathbf{g} \cdot \mathbf{X} \nabla \rho+\nabla \mathbf{U} \cdot \nabla \mu_{e f f}$
+
+where $\mathbf{U}$ is the fluid velocity vector in Cartesian coordinates, $\rho$ is the density of the mixed fluid, $p^{*}=p-\rho \mathbf{g} \cdot \mathbf{X}$ is the pseudo-dynamic pressure, $p$ is the total pressure, $\mathbf{g}$ is the acceleration due to gravity, $\mathbf{X}$ is the position vector of the computational cells, and $\mu_{\text {eff }}=\mu+\mu_{t}$ is the effective dynamic viscosity, which is the sum of the molecular dynamic viscosity $\mu$ and the turbulent dynamic viscosity $\mu_{t}$.
+
+Table 2
+
+Properties of the floating box and the mooring lines for the EsflOWC experiments (Wu et al., 2019).
+
+\begin{tabular}{ll}
+\hline Properties & Value \\
+\hline Box length & $20 \mathrm{~cm}$ \\
+Box width & $20 \mathrm{~cm}$ \\
+Box height & $13.2 \mathrm{~cm}$ \\
+Box mass (with connections) & $3.16 \mathrm{~kg}$ \\
+Box center of gravity $(x, y, z)$ & $(0,0,-1.26) \mathrm{cm}$ \\
+Box initial draft & $7.86 \mathrm{~cm}$ \\
+Box moment of inertia $\left(\mathrm{I}_{x x}, \mathrm{I}_{y y}, \mathrm{I}_{z z}\right)$ & $(0.015,0.015,0.021) \mathrm{kg} \cdot \mathrm{m}^{2}$ \\
+Mooring line diameter & $3.656 \mathrm{~mm}$ \\
+Mooring line mass per unit length & $0.607 \mathrm{~g} / \mathrm{cm}$ \\
+Mooring line length & $145.5 \mathrm{~cm}$ \\
+Mooring axial stiffness & $19 \mathrm{~N}$ \\
+\hline
+\end{tabular}
+
+The two immiscible fluids of air and water are considered as one effective fluid and solved simultaneously throughout the computational domain, where the volume fraction of water in a computational cell, $\alpha$, serves as an indicator function to mark the location of the air-water interface. The VOF function dictates that $\alpha=1$ if the cell is full of water, $\alpha=0$ if the cell is full of air, and $0<\alpha<1$ if the cell is a mixture of the two fluids. The location of the air-water interface can be approximated by taking an iso-surface of $\alpha=0.5$ in the interface cells. The local density $\rho$ and the local viscosity $\mu$ of the fluid $\left(\mu_{\text {water }}=1.0 \mathrm{e}-3\right.$ Pa's and $\mu_{\text {air }}=1.48 \mathrm{e}-5 \mathrm{~Pa}$ 's) in each cell are weighted by
+
+$$
+\begin{aligned}
+& \rho=\alpha \rho_{\text {water }}+(1-\alpha) \rho_{\text {air }} \\
+& \mu=\alpha \mu_{\text {water }}+(1-\alpha) \mu_{\text {air }}
+\end{aligned}
+$$
+
+The VOF function is tracked by the advection equation
+
+$\frac{\partial \alpha}{\partial t}+\nabla \cdot(\mathbf{U} \alpha)+\nabla \cdot\left(\mathbf{U}_{\mathrm{r}} \alpha(1-\alpha)\right)=0$
+
+in which a third term is added to the classic VOF transport equation to limit the smearing of the interface (Hirt and Nichols, 1981). This artificial convective term is active only in a thin interface region where $0<\alpha<1$. More details about the VOF method can be found in Rusche (2002).
+
+Table 3
+
+Global coordinates of mooring line fairlead (a-d) and anchoring (A-D) connections.
+
+\begin{tabular}{ll}
+\hline Location & Coordinates $x, y, z(\mathrm{~m})$ \\
+\hline Fairlead a & $-0.1,0.1,-0.0736$ \\
+Fairlead b & $-0.1,-0.1,-0.0736$ \\
+Fairlead c & $0.1,0.1,-0.0736$ \\
+Fairlead d & $0.1,-0.1,-0.0736$ \\
+Anchor A & $-1.385,0.423,-0.5$ \\
+Anchor B & $-1.385,-0.423,-0.5$ \\
+Anchor C & $1.385,0.423,-0.5$ \\
+Anchor D & $1.385,-0.423,-0.5$ \\
+\hline
+\end{tabular}
+
+Table 4
+
+Incident regular wave conditions for model validation.
+
+\begin{tabular}{lllll}
+\hline Case \# & $\begin{array}{l}\text { Wave height } \\
+H(\mathrm{~m})\end{array}$ & $\begin{array}{l}\text { Wave period } \\
+T(\mathrm{~s})\end{array}$ & $\begin{array}{l}\text { Water depth } \\
+h(\mathrm{~m})\end{array}$ & $\begin{array}{l}\text { Wave length } \\
+L(\mathrm{~m})\end{array}$ \\
+\hline H12T18 & 0.12 & 1.8 & 0.5 & 3.57 \\
+H12T20 & 0.12 & 2.0 & 0.5 & 4.06 \\
+H15T18 & 0.15 & 1.8 & 0.5 & 3.57 \\
+\hline
+\end{tabular}
+
+Table 5
+
+Positions of the wave gauges within the numerical wave flume.
+
+\begin{tabular}{lll}
+\hline Wave gauges & $x(\mathrm{~m})$ & $y(\mathrm{~m})$ \\
+\hline WG1 & -2.74 & 0 \\
+WG2 & -0.05 & 0.26 \\
+WG3 & 0.07 & -0.36 \\
+WG4 & 0.55 & 0 \\
+WG5 & 1.9 & 0 \\
+WG6 & 2.9 & 0 \\
+\hline
+\end{tabular}
+
+\subsection{Floating body motions}
+
+The native rigid body motion library in OpenFOAM, i.e. sixDoFRigidBodyMotion, is applied to solve the six degrees of freedom (6-DoF) motion for the floating body. The equations of motion are formulated based on the conservation of linear and angular momentum:
+
+$\partial \mathbf{v}_{f} / \partial t=\mathbf{F}_{f} / m_{f}$
+
+$\partial \boldsymbol{\omega}_{f} / \partial t=\mathbf{I}_{f}^{-1} \cdot\left(\mathbf{M}_{f}-\boldsymbol{\omega}_{f} \times\left(\mathbf{I}_{f} \cdot \boldsymbol{\omega}_{f}\right)\right)$
+
+where the subscript $f$ denotes the quantities for the floating body. $\mathbf{v}_{f}$ and $\omega_{f}$ are the linear and angular velocity of the body, and $m_{f}$ and $\mathbf{I}_{f}$ are the mass and moment of inertia of the body. $\mathbf{F}_{f}$ and $\mathbf{M}_{f}$ are the total external forces and moments acting on the body calculated by
+
+$\mathbf{F}_{f}=\iint_{S}(p \mathbf{I}+\boldsymbol{\tau}) \cdot d \mathbf{S}+\mathbf{F}_{\text {mooring }}+m_{f} \mathbf{g}$
+$\mathbf{M}_{f}=\iint_{S} \boldsymbol{r}_{C S} \times(p \mathbf{I}+\boldsymbol{\tau}) \cdot d \mathbf{S}+\boldsymbol{r}_{C M} \times \mathbf{F}_{\text {mooring }}+\boldsymbol{r}_{C G} \times m_{f} \mathbf{g}$
+
+where I is the identity matrix, $\tau$ is the viscous stress, and $S$ denotes the floating body's surface. The fluid forces on the body are calculated by integrating the normal pressure and the tangential shear stress over the body's boundary (Gatin et al., 2017). $\mathbf{F}_{\text {mooring }}$ is the mooring reaction force, while $\boldsymbol{r}_{C S}, \boldsymbol{r}_{C M}$ and $\boldsymbol{r}_{C G}$ are the moment arms of the hydrodynamic force, mooring force and gravity force, respectively. When the center of mass and center of rotation are identical, $\boldsymbol{r}_{C G}=0$. Based on the linear and angular accelerations from Eq. (8) and Eq. (9), the Newmark integration scheme is applied to update the velocity, position, and orientation of the floating body.
+
+\subsection{Dynamic mesh motion}
+
+Two mesh motion methods are applied in this study to accommodate the floating boy motion in the CFD computational domain (see Fig. 1 for a demonstration). The first method is the mesh deformation or mesh morphing technique, which is the classical method to accommodate body motion in the computational domain without topological changes (Jasak and Tukovc, 2010). Note that this mesh deformation method is suitable for small amplitude body motions, as large motions (translation or rotation) may continuously squeeze and stretch the computational cells, resulting in deteriorated mesh quality (such as large aspect ratio cells or highly skewed and severely non-orthogonal cell faces) and thus adversely affect simulation results. Jacobsen et al. (2012) found that it is
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-04.jpg?height=1238&width=1478&top_left_y=1262&top_left_x=292)
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-04.jpg?height=43&width=1814&top_left_y=2511&top_left_x=124)
+OpenFOAM's two-phase flow solver. (a)
+
+Wavemaker
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-05.jpg?height=197&width=1402&top_left_y=200&top_left_x=346)
+
+(b)
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-05.jpg?height=156&width=1400&top_left_y=444&top_left_x=344)
+
+(c)
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-05.jpg?height=234&width=652&top_left_y=696&top_left_x=320)
+
+(d)
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-05.jpg?height=253&width=738&top_left_y=681&top_left_x=1009)
+
+Fig. 3. Numerical model setup for the physical experiment (Wu et al., 2019). (a) Side view and (b) plan view of the numerical wave flume. (c) Side view and (d) plan view of the detailed configuration of the floating box and the 4-point symmetric catenary mooring system. The vertical domain size is $0.8 \mathrm{~m}$ for simulations using overset grid, and $0.96 \mathrm{~m}$ for deforming mesh simulations.
+
+necessary to keep the cell aspect ratios around 1.0 in the vicinity of the free surface in order to accurately simulate breaking waves. Identified by the distance from a specific cell center to the moving boundary, the computational domain is divided into three regions: the inner region, middle region and outer region. The mesh cells in the inner region, which are close to the moving boundary, follow the motion of the rigid body. The mesh cells in the outer region are held stationary. The cells between the inner region and the outer region are moved based on the spherical linear interpolation (SLERP) of the body displacement. The SLERP method applied a cosine-like scale factor, a function of cell distance to the moving body boundary, to guarantee a smooth transition of cell movements between the inner and outer regions (Chen and Christensen, 2018).
+
+The second method uses the overset mesh library in OpenFOAM (v2012), which is particularly suitable for applications involving largeamplitude motions (Chen et al., 2019; Windt et al., 2020). In the overset mesh method, two sets of grids are defined: one for a background mesh and one for a body-fitted overset mesh. A composite computational domain is then generated via cell-to-cell mappings between the two disconnected grids, which may arbitrarily overlay each other. The background mesh is stationary, while the overset mesh can move following the body motion, prescribed in advance or calculated according to Newton's second law. The cells in the entire domain are classified into three categories: calculated, interpolated, and holes. The flow governing equations are solved for calculated cells. The interpolated cells are employed to interpolate flow variables between the two mesh regions. The holes cells, which represent the moving body, are blocked out during the calculation. Because of the interpolation between different mesh regions, the overset mesh method may be more computationally demanding than the mesh deformation method (Windt et al., 2020).
+
+\subsection{Mooring dynamics model}
+
+In the lumped-mass formulation, the mass of the mooring line is discretized into point masses at nodes, assigning each node half the summed mass of the two adjacent line segments. The mooring line model MoorDyn combines internal axial stiffness and damping forces with weight and buoyancy forces, hydrodynamic forces from Morison's equation, and forces from contact with the seabed.
+
+As described by Hall and Goupee (2015), each mooring line is discretized into $N$ equal-length segments consisting of $N+1$ nodes. The node index starts with 0 at the anchor and ends with $N+1$ at the fairlead. Each node is represented by a global position vector $\mathbf{r}=\mathbf{r}(x, y, z)$. Connecting two adjacent nodes $\mathbf{r}_{i}$ and $\mathbf{r}_{i+1}$ is segment $i+1 / 2$, the tangent of which is $\widehat{\mathbf{q}}_{i+1 / 2}$ pointing from node $i$ to node $i+1$,
+
+$\widehat{\mathbf{q}}_{i+1 / 2}=\frac{\mathbf{r}_{i+1}-\mathbf{r}_{i}}{\left|\mathbf{r}_{i+1}-\mathbf{r}_{i}\right|}$
+
+The tension in the segment due to axial stiffness is
+
+$\mathbf{T}_{i+1 / 2}=E \frac{\pi}{4} d^{2} \varepsilon_{i+1 / 2} \widehat{\mathbf{q}}_{i+1 / 2}$
+
+where $E$ is the Young's (elastic) modulus, $d$ is the mooring line diameter, and $\varepsilon_{i+1 / 2}=\left|\mathbf{r}_{i+1}-\mathbf{r}_{i}\right| / l-1$ is the strain with $l$ being the unstretched segment length.
+
+The internal damping force in the segment which contributes to numerical stability is
+
+$\mathbf{C}_{i+1 / 2}=C_{i n t} \frac{\pi}{4} d^{2} \dot{\varepsilon}_{i+1 / 2} \widehat{\mathbf{q}}_{i+1 / 2}$
+
+where $C_{i n t}$ is the internal damping coefficient, and $\dot{\varepsilon}_{i+1 / 2}=\partial \varepsilon_{i+1 / 2} / \partial t$ is the strain rate.
+
+The hydrodynamic forces including drag and added mass are calculated using the Morison equation, applied directly at node $i$. The tangent at node $i, \widehat{\mathbf{q}}_{i}$, is approximated as a unit vector along a line passing through its two adjacent nodes
+
+$\widehat{\mathbf{q}}_{i}=\frac{\mathbf{r}_{i+1}-\mathbf{r}_{i-1}}{\left|\mathbf{r}_{i+1}-\mathbf{r}_{i-1}\right|}$
+
+The drag force acting on node $i$ is composed of a transverse component, $\mathbf{D}_{n i}$, and a tangential component, $\mathbf{D}_{t i}$,
+
+$\mathbf{D}_{n i}=0.5 \rho C_{d n} d l\left|\left(\dot{\mathbf{r}}_{i} \cdot \widehat{\mathbf{q}}_{i}\right) \widehat{\mathbf{q}}_{i}-\dot{\mathbf{r}}_{i}\right|\left(\left(\dot{\mathbf{r}}_{i} \cdot \widehat{\mathbf{q}}_{i}\right) \widehat{\mathbf{q}}_{i}-\dot{\mathbf{r}}_{i}\right)$
+
+$\mathbf{D}_{t i}=0.5 \rho C_{d t} d l\left|\left(-\dot{\mathbf{r}}_{i} \cdot \widehat{\mathbf{q}}_{i}\right) \widehat{\mathbf{q}}_{i}\right|\left(-\dot{\mathbf{r}}_{i} \cdot \widehat{\mathbf{q}}_{i}\right) \widehat{\mathbf{q}}_{i}$
+
+where $C_{d n}$ is the transverse drag coefficient, $C_{d t}$ is the tangential drag coefficient, and $\dot{\mathbf{r}}_{i}$ is the mooring line node velocity. Note that these forces are calculated assuming quiescent water; wave kinematics are excluded by MoorDyn at the moment. Hence the relative velocity (acceleration) between fluid and mooring node is $-\dot{\mathbf{r}}_{i}\left(-\ddot{\mathbf{r}}_{i}\right)$ in this case.
+
+Similarly, the added mass force is composed of a transverse 
+
+\section{deformMesh}
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-06.jpg?height=1714&width=780&top_left_y=248&top_left_x=236)
+
+\section{Overset}
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-06.jpg?height=1714&width=776&top_left_y=240&top_left_x=1054)
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-06.jpg?height=43&width=1814&top_left_y=1978&top_left_x=124)
+
+![](https://cdn.mathpix.com/cropped/2023_08_22_fb43b59715fa66420109g-06.jpg?height=35&width=1814&top_left_y=2017&top_left_x=124)
+set simulation.
+
+component and a tangential component, which can then be combined into a $3 \times 3$ added mass matrix for node $i$,
+
+$\mathbf{a}_{i}=\mathbf{a}_{n i}+\mathbf{a}_{t i}=\rho \frac{\pi}{4} d^{2} l\left[C_{a n}\left(\mathbf{I}-\widehat{\mathbf{q}}_{i} \widehat{\mathbf{q}}_{i}^{T}\right)+C_{a t}\left(\widehat{\mathbf{q}}_{i} \widehat{\mathbf{q}}_{i}^{T}\right)\right]$
+
+where $C_{a n}$ and $C_{a t}$ are the transverse and tangential added mass coefficients, respectively.
+
+The mooring line seabed interaction is modeled by a linear springdamper approach. When a node touches the seabed (i.e. $z_{i} \leq z_{b}$ ), a vertical reaction force is applied to that node
+
+$\mathbf{B}_{i}=l d\left[\left(z_{b}-z_{i}\right) k_{b}-\dot{z}_{i} c_{b}\right] \widehat{\mathbf{e}}_{z}$ where $k_{b}$ and $c_{b}$ are the seabed stiffness and damping coefficient, $z_{b}$ is the seabed elevation, $z_{i}$ and $\dot{z}_{i}$ are the node vertical coordinate and velocity, and $\widehat{\mathbf{e}}_{z}$ is a unit vector in the positive $z$ direction.
+
+Combining the above forces with submerged weight, $\mathbf{W}_{i}$, the complete equation of motion for each node $i$ (with a lumped mass, $m_{i}$ ) is
+
+$\left(m_{i} \mathbf{I}+\mathbf{a}_{i}\right) \ddot{\mathbf{r}_{i}}=\mathbf{T}_{i+1 / 2}-\mathbf{T}_{i-1 / 2}+\mathbf{C}_{i+1 / 2}-\mathbf{C}_{i-1 / 2}+\mathbf{W}_{i}+\mathbf{B}_{i}+\mathbf{D}_{n i}+\mathbf{D}_{t i}$
+
+This system of equations for all nodes of the mooring lines is solved using a constant-time-step second-order Runge-Kutta integration algorithm. 

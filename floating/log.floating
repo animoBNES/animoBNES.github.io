@@ -78,10 +78,10 @@ LTS (pseudo-transient simulations)
         idN=false
     fi
     echo "$idN"
-    if [ "${idN:-false}" = true ]; then
-        ./openfoam-docker -default -data=/
-    else
+    if [ "${idN:-false}" = false ]; then
         ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
+    else
+        ./openfoam-docker -default -data=/
     fi
     cd /data/eun
 
