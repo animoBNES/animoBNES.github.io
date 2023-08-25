@@ -1,3 +1,100 @@
+#
+https://dl.openfoam.com/source/v2112/openfoam-OpenFOAM-v2112.tar.gz
+https://dl.openfoam.com/source/v2112/ThirdParty-v2112.tgz
+
+## ftp
+sftp a1702a01@nurion-dm.ksc.re.kr
+    * nurion data mover : nurion-dm.ksc.re.kr
+    * neuron data mover : neuron-dm.ksc.re.kr
+
+cd /scratch/a1702a01/data
+lls
+lcd Downloads/data
+mput openfoam-OpenFOAM-v2112.tar.gz ThirdParty-v2112.tgz
+mget aa
+exit
+quit sftp
+
+## install
+module purge
+module load intel/19.1.2 impi/19.1.2 cmake/3.17.4
+module load craype-mic-knl fftw_mpi/3.3.7
+    // check
+
+clear
+
+// tar -xvzf ~/src/openfoam-OpenFOAM-v2112.tar.gz
+tar -xvzf ~/src/OpenFOAM-v2112.tgz
+tar -xvzf ~/src/ThirdParty-v2112.tgz
+
+mv openfoam-OpenFOAM-v2112 OpenFOAM-v2112
+ls
+
+''s's
+sed -i -e 's/\(boost_version=\)boost_1_74_0/\1boost-system/' OpenFOAM-v2112/etc/config.sh/CGAL
+sed -i -e 's/\(cgal_version=\)CGAL-4.14.3/\1cgal-system/' OpenFOAM-v2112/etc/config.sh/CGAL
+
+vi OpenFOAM-v2112/etc/config.sh/CGAL // cgal check
+vi OpenFOAM-v2112/etc/bashrc
+   :set nu // line number
+
+   // 72
+   export WM_COMPILER=Gcc
+   export WM_COMPILER=Icc
+
+   // 80
+   export WM_LABEL_SIZE=32
+   export WM_LABEL_SIZE=64
+
+   // 98
+   export WM_MPLIB=SYSTEMOPENMPI
+   export WM_MPLIB=INTELMPI
+
+   :!wq
+
+mkdir -p OpenFOAM-v2112/platforms/linux64IccDPInt64Opt/bin
+// source /scratch/{USER_ID}/OpenFOAM/OpenFOAM-v2112/etc/bashrc
+source ~/src/OpenFOAM-v2112/etc/bashrc
+// source /scratch/a1702a01/OpenFOAM/OpenFOAM-v2112/etc/bashrc
+mkdir -p $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER
+
+ln -s /apps/common/gmp/6.1.2 $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/gmp-system
+ln -s /apps/common/mpfr/4.0.1 $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/mpfr-system
+ln -s /apps/common/mpc/1.1.0 $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/mpc-system
+ln -s /apps/common/boost/1.68.0 $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/boost-system
+ln -s /apps/common/CGAL/4.9.1 $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/cgal-system
+ln -s /apps/applications/cmake/3.17.4 $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER/cmake-system
+
+ls $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER
+// boost-system cgal-system cmake-system gmp-system mpc-system mpfr-system
+
+cd $WM_PROJECT_DIR
+pwd
+./Allwmake 2>&1 |tee make.log
+
+4. 테스트
+
+ $ module load intel/18.0.3 impi/18.0.3
+
+ $ source /scratch/{USER_ID)/OpenFOAM/OpenFOAM-v2112/etc/bashrc
+
+
+ $ mkdir -p $FOAM_RUN
+
+ $ run
+
+ $ cp -r $FOAM_TUTORIALS/incompressible/simpleFoam/pitzDaily .
+
+ $ cd pitzDaily
+
+ $ blockMesh
+
+ $ simpleFoam
+
+※ 위 예제에서 /scratch/{USER_ID} 경로는 설치 테스트 시 사용된 경로이므로 변경 후 사용
+
+
+
 ■ KISTI 슈퍼컴퓨터 사용자 계정정보 안내 ■
 KISTI 슈퍼컴퓨팅센터 계정담당자입니다.
 슈퍼컴퓨터 사용을 위한 계정 정보를 다음과 같이 알려드립니다.
