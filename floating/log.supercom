@@ -54,6 +54,7 @@ vi OpenFOAM-v2112/etc/bashrc
 
 mkdir -p OpenFOAM-v2112/platforms/linux64IccDPInt64Opt/bin
 // source /scratch/{USER_ID}/OpenFOAM/OpenFOAM-v2112/etc/bashrc
+source /scratch/a1702a01/OpenFOAM/OpenFOAM-v2112/etc/bashrc
 source ~/src/OpenFOAM-v2112/etc/bashrc
 // source /scratch/a1702a01/OpenFOAM/OpenFOAM-v2112/etc/bashrc
 mkdir -p $WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER
@@ -112,6 +113,22 @@ a1702a01
 
 
 ssh -l a1702a01 nurion.ksc.re.kr -p 22
+
+1. 계정정보
+Account: pd1532
+Login id: a1702a01
+User name: 김보현 dlQms!#09
+Initial password: nuri2023@@, isfet!#*09
+
+https://docs-ksc.gitbook.io/nurion-user-guide/
+
+a1702a01
+1106
+
+
+ssh -l a1702a01 nurion.ksc.re.kr -p 22
+
+
 
 
 계류선에 의해 지지되는 부유식 태양광 발전 시설의 강품에 대한 CFD 해석
