@@ -203,6 +203,21 @@ x        ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-3
     fi
     cd /data/eun
 
+### nurion
+module load intel/oneapi_21.3 impi/oneapi_21.3 cmake/3.26.2
+module load craype-mic-knl fftw_mpi/3.3.7
+module load lapack/3.7.0
+module list
+
+source /apps/applications/OpenFOAM/v2212/intel/oneapi_21.2/impi/oneapi_21.2/mic-knl/OpenFOAM/OpenFOAM-v2212/etc/bashrc
+source /apps/applications/OpenFOAM/v2212/intel/oneapi_21.2/impi/oneapi_21.2/x86-skylake/OpenFOAM/OpenFOAM-v2212/etc/bashrc
+
+#### MoorDyn
+    thirdParty/MoorDyn_v1
+        git -b master https://github.com/FloatingArrayDesign/MoorDyn.git
+    thirdParty/MoorDyn
+        git -b v2 https://github.com/FloatingArrayDesign/MoorDyn.git
+
 ### apt
         ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-353ab353a318
 
