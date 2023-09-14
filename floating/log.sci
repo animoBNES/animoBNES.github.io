@@ -1,10 +1,7 @@
 # sci
 
 sudo chown sbkim:sbkim eun
-
 sudo ./openfoam-docker -default -data=/media/sbkim/urban/urban/hines
-
-
 
 eigen
 boost
@@ -17,11 +14,37 @@ qt
 vtk
 pcl
 
+## vtk ref. log.vtk
 
-## vtk
 
-### 1
-https://docs.vtk.org/en/latest/build_instructions/index.html
+
+2018-08-13 13:36
+
+CCFLAGS =       -O3 -fno-alias -restrict -ip -unroll0 -shared-intel
+
+
+
+LINKFLAGS =     -O -L/cm/shared/apps/intel/compilers_and_libraries/2018.3.222/linux/mkl/lib/intel64
+
+
+
+LIB =           -lstdc++ -lpthread -lmkl_sequential -lmkl_intel_lp64 -lmkl_core
+
+
+
+MPI_INC = -I/cm/shared/apps/intel/compilers_and_libraries/2018.3.222/linux/mpi/include64 -DMPICH_SKIP_MPICXX -DOMPI_SKIP_MPICXX=1
+MPI_PATH =
+MPI_LIB = -L/cm/shared/apps/intel/compilers_and_libraries/2018.3.222/linux/mpi/lib64
+
+
+
+FFT_INC = -DFFT_MKL -I/applic/compilers/mic-knl/intel/18.0.3/mpi/impi/18.0.3/applib2/fftw/3.3.7/include
+FFT_PATH =
+FFT_LIB = -L/applic/compilers/mic-knl/intel/18.0.3/mpi/impi/18.0.3/applib2/fftw/3.3.7/lib
+CCFLAGS = -O3 -unroll0
+
+module purge
+module load
 
     sudo apt install \
     build-essential \
@@ -205,7 +228,7 @@ rm -rf ~/vtk/build
 mkdir -p ~/vtk/build
 cd ~/vtk/build
 ccmake -GNinja /data/eun/VTK-9.2.6
-<!-- ccmake -GNinja /home/sbkim/Work/sci/VTK-9.2.6 -->
+ccmake -GNinja /home/sbkim/Work/sci/VTK-9.2.6
 
 ##### configure error
 CUDACXX=/usr/local/cuda/bin/nvcc
