@@ -1,4 +1,4 @@
-
+# experts
 felix.gorintin@innosea.fr and +33 6 99 00 30 97
 
 
@@ -209,9 +209,7 @@ x        ./openfoam-docker -default -data=/media/sbkim/1e4daf62-dd5b-4336-a492-3
 
 ### nurion
 
-
 yum install autoconf automake bzip2 bzip2-devel cmake freetype-devel gcc gcc-c++ git libtool make pkgconfig zlib-devel
-
 
 cmake
 
@@ -388,7 +386,6 @@ sudo apt install libvtk9-dev
 ## 5.2 map++
         https://bitbucket.org/mmasciola/map-plus-plus/src/master/
         https://map-plus-plus.readthedocs.io/en/latest/ref.html
-
 
 ## 5.3 MooDy
         https://github.com/johannep/moodyAPI

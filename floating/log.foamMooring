@@ -44,3 +44,56 @@ cd foamMooring/
 
 cd /data/eun/floating
 
+https://bitbucket.org/mmasciola/map-plus-plus/src/master/
+
+
+## ksc
+### nurion
+#### KNL
+
+##### foamMooring
+https://gitlab.com/hfchen20/foamMooring
+https://doi.org/10.1016/j.apor.2022.103210
+
+module purge
+module load intel/oneapi_21.3 impi/oneapi_21.3 cmake/3.26.2
+module load craype-mic-knl fftw_mpi/3.3.7
+source /apps/applications/OpenFOAM/v2212/intel/oneapi_21.2/impi/oneapi_21.2/mic-knl/OpenFOAM/OpenFOAM-v2212/etc/bashrc
+
+
+
+module purge
+module load craype-mic-knl
+module load cmake/3.26.2 gcc/8.3.0 openmpi/3.1.0
+
+        {MPI}
+        'mvapich2/2.3.1' 'mvapich2/2.3.6' 'openmpi/3.1.0'
+
+        {cpu_types}
+        'craype-mic-knl' 'craype-x86-skylake'
+
+        {libraries}
+        'CDO/1.8.2' 'hdf4/4.2.13' 'hdf5/1.10.2' 'lapack/3.7.0' 'libxc/4.0.0' 'libxc/4.3.4' 'NCO/4.7.4' 'NCO/4.9.2' 'ncl/6.5.0' 'ncview/2.1.7' 'netcdf/4.6.1'
+
+
+        'openmpi/3.1.0' supports the following modules
+
+        {libraries_using_mpi}
+        'fftw_mpi/2.1.5' 'fftw_mpi/3.3.7' 'hdf5-parallel/1.10.2' 'netcdf-hdf5-parallel/4.6.1' 'parallel-netcdf/1.10.0' 'pio/2.3.1'
+
+
+cmake -DBUILD_TESTING=OFF -DEXTERNAL_EIGEN=OFF -DFORTRAN_WRAPPER=OFF -DMATLAB_WRAPPER=OFF -DPYTHON_WRAPPER=OFF -DUSE_VTK=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$FOAM_USER_LIBBIN/.. ../MoorDyn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
