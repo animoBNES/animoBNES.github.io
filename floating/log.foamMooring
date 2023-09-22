@@ -55,6 +55,7 @@ https://bitbucket.org/mmasciola/map-plus-plus/src/master/
 https://gitlab.com/hfchen20/foamMooring
 https://doi.org/10.1016/j.apor.2022.103210
 
+make clean
 module purge
 module load intel/oneapi_21.3 impi/oneapi_21.3 cmake/3.26.2
 module load craype-mic-knl fftw_mpi/3.3.7
@@ -92,6 +93,23 @@ https://github.com/FloatingArrayDesign/MoorDyn
 ##### map plus
 https://map-plus-plus.readthedocs.io/en/latest/ref.html
 https://bitbucket.org/mmasciola/map-plus-plus/src/master/
+
+
+module purge
+module load craype-mic-knl fftw_mpi/3.3.7
+module load intel/oneapi_21.3 impi/oneapi_21.3 cmake/3.26.2
+
+make clean
+module purge
+module load craype-mic-knl fftw_mpi/3.3.7
+
+module load intel/oneapi_21.3 impi/oneapi_21.3 cmake/3.26.2
+source /apps/applications/OpenFOAM/v2212/intel/oneapi_21.2/impi/oneapi_21.2/mic-knl/OpenFOAM/OpenFOAM-v2212/etc/bashrc
+
+
+
+source /apps/applications/OpenFOAM/v2212/intel/oneapi_21.2/impi/oneapi_21.2/mic-knl/OpenFOAM/OpenFOAM-v2212/etc/bashrc
+
 
 
 ##### moody
