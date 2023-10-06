@@ -1,4 +1,6 @@
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 **/.ipynb_checkpoints
+floating/tools/foamMooring/thirdParty/MoorDyn.build/source/CMakeFiles/moordyn.dir/cmake_pch.hxx.gch
+floating/tools/monai_runup.mph
 tools/
