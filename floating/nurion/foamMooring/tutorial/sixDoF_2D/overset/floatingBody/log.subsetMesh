@@ -1,0 +1,36 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2306                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _fbf00d6b-20230626 OPENFOAM=2306 version=2306
+Arch   : "LSB;label=32;scalar=64"
+Exec   : subsetMesh -overwrite c0 -patch floatingObject
+Date   : Aug 22 2023
+Time   : 15:26:17
+Host   : 74a17a599c3a
+PID    : 269
+I/O    : uncollated
+Case   : /data/eun/foam-v2306/foamMooring/tutorial/sixDoF_2D/overset/floatingBody
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Adding exposed internal faces to existing patch "floatingObject"
+
+Using cellSet c0
+
+Subset 960 of 1200 cells
+
+Writing subsetted mesh and fields to time 0
+
+End
+

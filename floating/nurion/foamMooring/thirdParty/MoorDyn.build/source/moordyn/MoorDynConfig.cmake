@@ -1,0 +1,20 @@
+include(CMakeFindDependencyMacro)
+
+set(MOORDYN_EXTERNAL_EIGEN OFF)
+set(MOORDYN_USE_VTK ON)
+set(MOORDYN_PYTHON_WRAPPER OFF)
+set(MOORDYN_FORTRAN_WRAPPER OFF)
+set(MOORDYN_MATLAB_WRAPPER OFF)
+set(MOORDYN_SINGLEPRECISSION OFF)
+set(MOORDYN_SSE OFF)
+set(MOORDYN_FASTMATH OFF)
+
+if(MOORDYN_EXTERNAL_EIGEN)
+    find_dependency(Eigen3)
+endif()
+if(MOORDYN_USE_VTK)
+    find_dependency(VTK)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/MoorDynTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/MoorDynConfigVersion.cmake")

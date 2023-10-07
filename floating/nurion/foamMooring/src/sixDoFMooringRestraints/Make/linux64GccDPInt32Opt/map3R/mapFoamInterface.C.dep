@@ -1,0 +1,23 @@
+$(OBJECTS_DIR)/map3R/mapFoamInterface.C.dep: \
+map3R/mapFoamInterface.C \
+map3R/mapFoamInterface.H \
+../../map-plus-plus/src/map.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/mapsys.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/simclist/simclist.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/bstring/bstrlib.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/cminpack/cminpack.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/cminpack/cminpackP.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/cminpack/minpack.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/cminpack/cminpack.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/MAP_Types.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/maperror.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/map.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/lmroutines.hpp \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/lapack/lapacke.h \
+/data/eun/foam-v2306/foamMooring/map-plus-plus/src/lapack/lapacke_mangling.h \
+../../map-plus-plus/src/mapinit.h \
+../../map-plus-plus/src/outputstream.h \
+../../map-plus-plus/src/mapapi.h \
+../../map-plus-plus/src/freedata.h \
+
+#END
