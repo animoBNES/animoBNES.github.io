@@ -442,3 +442,4 @@ export CPATH=/apps/common/VTK/7.1.1/include:$CPATH
 sed -i -e 's/-DUSE_VTK=OFF/-DUSE_VTK=ON/g' Allwmake
 
 
+scp -r a1702a01@nurion.ksc.re.kr:/home01/a1702a01/tte
